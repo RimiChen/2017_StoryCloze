@@ -1,15 +1,30 @@
-# Explore Google's huge Word2Vec model.
+from gensim import models
 
-from gensim.models import word2vec
-import gensim
-import logging
+sentence = models.doc2vec.LabeledSentence(
+    words=[u'so`bme', u'words', u'here'], tags=["SENT_0"])
+sentence1 = models.doc2vec.LabeledSentence(
+    words=[u'here', u'we', u'go'], tags=["SENT_1"])
 
-print(word2vec.FAST_VERSION)
-# Logging code taken from http://rare-technologies.com/word2vec-tutorial/
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+sentences = [sentence, sentence1]
 
-# Load Google's pre-trained Word2Vec model.
-#model =  gensim.models.KeyedVectors.load_word2vec_format('../Models/GoogleNews-vectors-negative300.bin', binary=True)
+class LabeledLineSentence(object):
+    def __init__(self, filename):
+        self.filename = filename
+    def __iter__(self):
+        for uid, line in enumerate(open(filename)):
+            yield LabeledSentence(words=line.split(), labels=['SENT_%s' % uid])
+            
+model = models.Doc2Vec(alpha=.025, min_alpha=.025, min_count=1)
+model.build_vocab(sentences)
 
-#test = model['computer'];
-#print(test)
+for epoch in range(10):
+    model.train(sentences)
+    model.alpha -= 0.002  # decrease the learning rate`
+    model.min_alpha = model.alpha  # fix the learning rate, no decay
+
+model.save("my_model.doc2vec")
+model_loaded = models.Doc2Vec.load('my_model.doc2vec')
+
+print( model.docvecs.most_similar(["SENT_0"]))
+print(model_loaded.docvecs.most_similar(["SENT_1"]))
+print(model_loaded.docvecs.similarity("SENT_1", "SENT_0"))

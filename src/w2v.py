@@ -1,11 +1,14 @@
 from gensim import models
 
+stringTest = "some";
 sentence = models.doc2vec.LabeledSentence(
-    words=[u'so`bme', u'words', u'here'], tags=["SENT_0"])
+    words=[u'some' , u'words', u'here'], tags=["SENT_0"])
 sentence1 = models.doc2vec.LabeledSentence(
     words=[u'here', u'we', u'go'], tags=["SENT_1"])
+sentence2 = models.doc2vec.LabeledSentence(
+    words=[u'this', u'is', u'for', u'test'], tags=["SENT_2"])
 
-sentences = [sentence, sentence1]
+sentences = [sentence, sentence1, sentence2]
 
 class LabeledLineSentence(object):
     def __init__(self, filename):
@@ -25,6 +28,8 @@ for epoch in range(10):
 model.save("my_model.doc2vec")
 model_loaded = models.Doc2Vec.load('my_model.doc2vec')
 
-print( model.docvecs.most_similar(["SENT_0"]))
-print(model_loaded.docvecs.most_similar(["SENT_1"]))
-print(model_loaded.docvecs.similarity("SENT_1", "SENT_0"))
+#print( model.docvecs.most_similar(["SENT_0"]))
+#print(model_loaded.docvecs.most_similar(["SENT_1"]))
+print(model_loaded.docvecs.similarity("SENT_0", "SENT_1"))
+print(model_loaded.docvecs.similarity("SENT_1", "SENT_2"))
+print(model_loaded.docvecs.similarity("SENT_2", "SENT_0"))

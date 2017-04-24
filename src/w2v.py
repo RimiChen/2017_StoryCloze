@@ -8,6 +8,7 @@ sentence1 = models.doc2vec.LabeledSentence(
 
 
 sentences = [sentence, sentence1]
+#print(sentences)
 
 class LabeledLineSentence(object):
     def __init__(self, filename):

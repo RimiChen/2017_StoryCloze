@@ -62,7 +62,7 @@ def getTrainingSet(csvPath, segmentSize):
                 if storyCount % int(segmentSize) ==1:
                     if len(currentStories)> 0:
                         currentFileNumber = currentFileNumber + 1
-                        jsonPath ='../Dataset/trainingSet/training'+str(currentFileNumber)+'.json'
+                        jsonPath ='../Dataset/trainingSet/training_40000_'+str(currentFileNumber)+'.json'
                         print(jsonPath)
 
                         with io.open(jsonPath, 'w', encoding='utf8') as outfile:

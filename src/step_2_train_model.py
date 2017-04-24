@@ -44,7 +44,7 @@ for epoch in range(10):
     model.min_alpha = model.alpha  # fix the learning rate, no decay
     
     
-model.save("test_model.doc2vec")
+model.save("model_40000.doc2vec")
 #model_loaded = models.Doc2Vec.load('test_model.doc2vec')
 
 #print(model_loaded.docvecs.similarity("b929f263-1dcd-4a0b-b267-5d5ff2fe65bb_1", "7cbbc0af-bcce-4f56-871d-963f9bb6a99d_1"))

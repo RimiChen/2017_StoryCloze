@@ -4,11 +4,12 @@
 
 import csv
 import sys
+import json
 # sys.argv
 
-print("Test subprocess");
+#print("Test subprocess");
 
-def getTrainingSet(csvPath):
+def getTrainingSet(csvPath, segmentSize):
     # this function read the training dataset from csv
     # read import csv
     with open(csvPath) as csvfile:
@@ -40,11 +41,24 @@ def getTrainingSet(csvPath):
             
             
         #print(len(story_ids))
-        
+        storyCount = 0
+        currentFileNumber =-1
         for iter in enumerate(story_ids):
+            #output every 100 lines
+            #remove the first row
+            if storyCount == 0:
+                #row 0
+                print("Remove the first row")
+            else:
+                
+            print(story_ids[storyCount])
             
+            if storyCount % int(segmentSize) ==1:
+                currentFileNumber = currentFileNumber + 1
+            storyCount = storyCount + 1
+            #whenever processing a story, storyCount +1
 #def getTestSet():
     # this function read the test set from csv
     
 #print(sys.argv[1])
-getTrainingSet(sys.argv[1])
+getTrainingSet(sys.argv[1], sys.argv[2])

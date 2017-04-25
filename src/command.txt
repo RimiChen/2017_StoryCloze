@@ -1,0 +1,5 @@
+
+
+py step_3_method1.py ./trained_model/model_1000.doc2vec ../Dataset/testSet/test0.json ../Dataset/result/result.json
+
+py step_4_checkAnswer.py ../Dataset/testSet/answer0.json ../Dataset/result/result.json

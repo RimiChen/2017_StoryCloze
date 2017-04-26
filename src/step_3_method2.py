@@ -128,7 +128,7 @@ def get_ending(story):
     
     if avg_1 < avg_2:
         result = 1
-    else if avg_1 == avg_2:
+    elif avg_1 == avg_2:
         result = randint(1,2)
     else:
         result = 2
